@@ -4,8 +4,8 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div>
-      <div>
-      <ConnectButton />
+      <div className="flex justify-end p-4">
+        <ConnectButton />
       </div>
       <div className="border-b-2 border-primary text-primary font-medium text-center py-4 text-5xl">
         Defi Dashboard Terminal

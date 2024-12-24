@@ -1,17 +1,10 @@
 import "./globals.css";
+import '@rainbow-me/rainbowkit/styles.css';
 
 import { Geist, Geist_Mono } from "next/font/google";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import {
-  RainbowKitProvider,
-  getDefaultConfig,
-} from '@rainbow-me/rainbowkit';
 
 import type { Metadata } from "next";
-import { WagmiProvider } from 'wagmi';
+import { Providers } from './providers';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,10 +31,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-
-     
-            {children}
-           
+          <Providers>
+          {children}
+          </Providers>
       </body>
     </html>
   );
