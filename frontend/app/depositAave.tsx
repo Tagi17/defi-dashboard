@@ -1,4 +1,4 @@
-import {aavePoolAbi} from './abi'
+import {erc20Abi} from './logic/abi'
 import { useWriteContract, } from 'wagmi'
 
 //works for any token except eth
@@ -10,7 +10,7 @@ function App() {
         try {
             const result = await writeContractAsync({
                 address: poolContractAddress as `0x${string}`,
-                abi: aavePoolAbi,
+                abi: erc20Abi,
                 functionName: "transmute",
                 args: [],
             });

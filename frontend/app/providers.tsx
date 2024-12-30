@@ -11,11 +11,11 @@ import { arbitrum, base, mainnet, optimism, polygon, sepolia } from 'wagmi/chain
 import React from 'react';
 
 const ArbFork = {
-  id: 1337,
+  id: 56007,
   name: 'ArbitrumFork',
   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
   rpcUrls: {
-    default: { http: ['http://localhost:8545'] },
+    default: { http: ['https://virtual.arbitrum.rpc.tenderly.co/20399f68-2053-4590-879e-6df01a48a5e7'] },
   },
 } as const satisfies Chain;
 
@@ -25,7 +25,7 @@ const config = getDefaultConfig({
   chains: [mainnet, polygon, optimism, arbitrum, base, sepolia, ArbFork],
   transports: {
     [mainnet.id]: http('https://arb-mainnet.g.alchemy.com/v2/oKfImgjXE-YSOWwHOmTYcRzxTkPzJ2g2'),
-    [ArbFork.id]: http('http://localhost:8545')
+    [ArbFork.id]: http('https://virtual.arbitrum.rpc.tenderly.co/20399f68-2053-4590-879e-6df01a48a5e7')
     },
     ssr: true, // If your dApp uses server side rendering (SSR)
   });

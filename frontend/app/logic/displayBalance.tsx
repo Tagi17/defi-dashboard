@@ -2,6 +2,8 @@
 
 import { useAccount, useBalance } from 'wagmi';
 
+import Image from "next/image";
+
 export default function DisplayBalance() {
     interface BalanceData {
         value: bigint;
@@ -21,14 +23,22 @@ export default function DisplayBalance() {
     }
     
     if (isError) {
-        return <div>Error: {error.message}</div>; // Adjust according to your error object structure
+        return <div>Error: {error.message}</div>; 
     }
     
     if (data) {
         const formattedBalance = (Number(data.value) / 10 ** data.decimals).toFixed(2);
         return (
-            <div className="text-xl">
-                Available balance to deposit: {formattedBalance} {data.symbol}
+            <div className="flex items-center space-x-2 text-sm">
+                 <span>Ether</span>
+                <Image
+                    src="/circle.png"
+                    alt="Circle"
+                    width={20}  
+                    height={20}
+                    unoptimized={true}  
+                />
+                <span>{formattedBalance} {data.symbol}</span>
             </div>
         );
     }
