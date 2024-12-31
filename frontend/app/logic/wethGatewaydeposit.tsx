@@ -96,7 +96,7 @@ export default function WethArbDeposit() {
                 className="text-white"
               />
               <DialogFooter className="sm:justify-start">
-                <Button type="button" variant="secondary">
+                <Button type="submit" variant="secondary">
                   Confirm
                 </Button>
                 <DialogClose asChild>

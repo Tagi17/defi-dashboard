@@ -20,8 +20,13 @@ export default function GetAaveWeth() {
       args: [userAddress as `0x${string}`],
     });
   
+  
   useEffect(() => {
-    fetchTokenPrice().then(setWETHPrice).catch(console.error);
+    fetchTokenPrice().then(price => {
+      setWETHPrice(price);
+    }).catch(error => {
+      console.error('Failed to fetch WETH price:', error);
+    });
   }, []);
   
   useEffect(() => {
@@ -31,6 +36,7 @@ export default function GetAaveWeth() {
     const valueInUSD = balanceInEth * Number(wethPrice);
     setWethValueinUSD(valueInUSD.toFixed(2));
   }, [userBalance, wethPrice]);
+
 
   if (!userAddress) return <div>User Address not found</div>;
   if (isLoadingUserBalance) return <div>Loading...</div>;
