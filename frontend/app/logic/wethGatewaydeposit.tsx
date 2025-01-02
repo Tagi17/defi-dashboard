@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import DialogDepositPopup from "./dialogPopup";
 import DisplayBalance from "./displayBalance";
 import GetAaveWeth from "./getAaveWeth";
+import GetApyData from "./getApyData"
 import Image from "next/image";
 
 //works for any token except eth
@@ -23,6 +24,9 @@ export default function WethArbDeposit() {
             <h3 className="text-4xl font-bold text-green-500">ETH</h3>
             <DisplayBalance />
           </div>
+        </div>
+        <div>
+          <GetApyData/>
         </div>
         <div className="text-green-600 text-lg mt-4 ml-4">
           <GetAaveWeth />
