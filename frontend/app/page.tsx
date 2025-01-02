@@ -34,31 +34,37 @@ export default function Home() {
       <div className="grid grid-cols-1 gap-6 p-8 bg-black text-primary">
         <div className="flex flex-col items-center space-y-4 bg-black p-6 shadow rounded-lg ">
           <div className="w-full max-w-4xl mx-auto">
-            <h2 className="text-4xl font-semibold text-green-500 mb-4 text-center border-b-2 border-primary pb-2">
+            {/* <h2 className="text-4xl font-semibold text-green-500 mb-4 text-center border-b-2 border-primary pb-2">
               AAVE
-            </h2>
+            </h2> */}
           </div>
-          <div className="w-full bg-black p-6 rounded-md border border-green-500 max-w-4xl mx-auto">
+          <div className="flex flex-row">
+            <div className="mr-24">Asset</div>
+            <div className="mr-24">Deposit APY</div>
+            <div className="mr-24">Current Deposit</div>
+            <div className="mr-24">Current Collateral</div>
+          </div>
+          <div className="w-full bg-black p-6 rounded-md border border-green-500 max-w-5xl mx-auto">
             <WethArbDeposit />
           </div>
         </div>
         <div className="flex flex-col items-center space-y-4 bg-black p-6 shadow rounded-lg ">
-          <div className="w-full max-w-4xl mx-auto">
+          <div className="w-full max-w-5xl mx-auto">
             <h2 className="text-4xl font-semibold text-green-500 mb-4 text-center border-b-2 border-primary pb-2">
               Compound
             </h2>
           </div>
-          <div className="w-full bg-black p-6 rounded-md border border-primary max-w-4xl mx-auto">
+          <div className="w-full bg-black p-6 rounded-md border border-primary max-w-5xl mx-auto">
             <div>Additional content goes here</div>
           </div>
         </div>
         <div className="flex flex-col items-center space-y-4 bg-black p-6 shadow rounded-lg ">
-          <div className="w-full max-w-4xl mx-auto">
+          <div className="w-full max-w-5xl mx-auto">
             <h2 className="text-4xl font-semibold text-green-500 mb-4 text-center border-b-2 border-primary pb-2">
               Uniswap
             </h2>
           </div>
-          <div className="w-full bg-black p-6 rounded-md border border-primary max-w-4xl mx-auto">
+          <div className="w-full bg-black p-6 rounded-md border border-primary max-w-5xl mx-auto">
             <div>Additional content goes here</div>
           </div>
         </div>
