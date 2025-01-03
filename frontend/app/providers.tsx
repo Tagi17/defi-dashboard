@@ -10,22 +10,31 @@ import { arbitrum, base, mainnet, optimism, polygon, sepolia } from 'wagmi/chain
 
 import React from 'react';
 
-const ArbFork = {
-  id: 56007,
+// const ArbFork = {
+//   id: 56007,
+//   name: 'ArbitrumFork',
+//   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+//   rpcUrls: {
+//     default: { http: ['https://virtual.arbitrum.rpc.tenderly.co/20399f68-2053-4590-879e-6df01a48a5e7'] },
+//   },
+// } as const satisfies Chain;
+
+const ArbMac = {
+  id: 8000,
   name: 'ArbitrumFork',
   nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
   rpcUrls: {
-    default: { http: ['https://virtual.arbitrum.rpc.tenderly.co/20399f68-2053-4590-879e-6df01a48a5e7'] },
+    default: { http: ['https://virtual.arbitrum.rpc.tenderly.co/ed9cd720-788c-4f90-8859-afb3cf3ecb4f'] },
   },
 } as const satisfies Chain;
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
   projectId: 'NEXT_PUBLIC_RAINBOW_KIT',
-  chains: [mainnet, polygon, optimism, arbitrum, base, sepolia, ArbFork],
+  chains: [mainnet, polygon, optimism, arbitrum, base, sepolia, ArbMac], //ArbFork
   transports: {
     [mainnet.id]: http('https://arb-mainnet.g.alchemy.com/v2/oKfImgjXE-YSOWwHOmTYcRzxTkPzJ2g2'),
-    [ArbFork.id]: http('https://virtual.arbitrum.rpc.tenderly.co/20399f68-2053-4590-879e-6df01a48a5e7')
+    [ArbMac.id]: http('https://virtual.arbitrum.rpc.tenderly.co/ed9cd720-788c-4f90-8859-afb3cf3ecb4f')
     },
     ssr: true, // If your dApp uses server side rendering (SSR)
   });

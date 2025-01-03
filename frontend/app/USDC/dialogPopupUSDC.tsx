@@ -10,21 +10,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { poolAbi, poolAddress } from "../ethLogic/poolContractAbi";
 import { useAccount, useWriteContract } from "wagmi";
 import { useEffect, useState } from "react";
-import { wethArbGatewayAddress, wethGatewayAbi } from "./wethGatewayAbi";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-export default function DialogDepositPopup() {
+export default function DialogDepositPopupUSDC() {
   const [userInput, setUserInput] = useState("1");
   const [wethPrice, setWethPrice] = useState("");
   const [userInputinWei, setUserInputinWei] = useState(BigInt(10 ** 18));
   const { address: userAddress } = useAccount();
 
   const { writeContractAsync } = useWriteContract();
-  const wethGatewayAddress = wethArbGatewayAddress;
 
   useEffect(() => {
     const weiValue = BigInt(Math.floor(Number(userInput) * 10 ** 18));
@@ -39,8 +38,8 @@ export default function DialogDepositPopup() {
   async function handleAaveArbDeposit() {
     try {
       const result = await writeContractAsync({
-        address: wethGatewayAddress as `0x${string}`,
-        abi: wethGatewayAbi,
+        address: poolAddress as `0x${string}`,
+        abi: poolAbi,
         functionName: "depositETH",
         args: [userAddress, userAddress, 0],
         value: userInputinWei,

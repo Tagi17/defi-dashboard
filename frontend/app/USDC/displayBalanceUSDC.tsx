@@ -4,7 +4,7 @@ import { useAccount, useBalance } from 'wagmi';
 
 import Image from "next/image";
 
-export default function DisplayBalance() {
+export default function DisplayBalanceUSDC() {
     interface BalanceData {
         value: bigint;
         symbol: string;
@@ -14,8 +14,9 @@ export default function DisplayBalance() {
     const { address: userAddress } = useAccount();
     
     const { data, isError, isLoading, error } = useBalance({
-        address: userAddress
-    }) as { data?: BalanceData, isError: boolean, isLoading: boolean, error: any };
+        address: userAddress,
+        token: '0xaf88d065e77c8cC2239327C5EDb3A432268e5831',
+    })
     
 
     if (isLoading) {
@@ -30,7 +31,7 @@ export default function DisplayBalance() {
         const formattedBalance = (Number(data.value) / 10 ** data.decimals).toFixed(2);
         return (
             <div className="flex items-center space-x-2 text-sm">
-                 <span>Ether</span>
+                 <span>USDC</span>
                 <Image
                     src="/circle.png"
                     alt="Circle"

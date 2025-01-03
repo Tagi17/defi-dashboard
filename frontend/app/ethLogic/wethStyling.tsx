@@ -6,11 +6,14 @@ import DialogDepositPopup from "./dialogPopup";
 import DisplayBalance from "./displayBalance";
 import GetAaveWeth from "./getAaveWeth";
 import GetApyData from "./getApyData"
+import GetBorrow from "./borrow";
+import GetUserDataCollat from "./getUserDataCollat"
 import Image from "next/image";
 
 //works for any token except eth
 export default function WethArbDeposit() {
- 
+ const wethAddress = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1';
+
   // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setUserInput(event.target.value);
   // }; if you wanted the input to automatically trigger metamask with every input
@@ -25,14 +28,20 @@ export default function WethArbDeposit() {
             <DisplayBalance />
           </div>
         </div>
-        <div>
+        <div className="text-lg">
           <GetApyData/>
         </div>
-        <div className="text-green-600 text-lg mt-4 ml-4">
+        <div className="text-green-600 text-lg ">
           <GetAaveWeth />
+        </div>
+        <div className="text-green-600 text-lg ">
+          <GetBorrow asset={wethAddress}/>
         </div>
         <div className="flex justify-end py-4 px-4">
           <DialogDepositPopup/>
+        </div>
+        <div className="flex justify-end py-4 px-4">
+          <GetUserDataCollat/>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import {erc20Abi} from './logic/abi'
+import {erc20Abi} from './ethLogic/abi'
 import { useWriteContract, } from 'wagmi'
 
 //works for any token except eth
