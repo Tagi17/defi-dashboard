@@ -44,9 +44,7 @@ export default function GetAaveWeth() {
   const formattedBalance = (Number(userBalance) / 10 ** 18).toFixed(2);
   return (
     <div className="flex flex-col items-center mr-12">
-      {/* <div>My WETH Balance: </div> */}
       <div className="items-center">{formattedBalance} WETH</div>
-      {/* <div className="text-sm">Equivalent in USD: ${wethValueinUSD}</div> */}
       <div className="text-sm">${wethValueinUSD}</div>
       <div></div>
     </div>

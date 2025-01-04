@@ -15,9 +15,10 @@ import { useAccount, useReadContract, useWriteContract, } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { DepositProvider } from './depositContext';
+import DisplayBalance from "./displayBalance";
 import GetUserDataCollat from "./getUserDataCollat"
-import { Input } from "@/components/ui/input"
-;
+import { Input } from "@/components/ui/input";
 import { fetchTokenPrice } from "../tokenPrice/tokenInfo";
 
 interface borrowProps {
@@ -25,7 +26,7 @@ interface borrowProps {
     // amount: bigint;
 }
 
-const GetBorrow: React.FC<borrowProps> = ({ asset}) =>{
+const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
     const { address: userAddress } = useAccount();
 
     interface BorrowParameters{
@@ -81,8 +82,10 @@ const GetBorrow: React.FC<borrowProps> = ({ asset}) =>{
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-md bg-black">
           <DialogHeader>
-            <DialogTitle className="text-green-500 text-xl">
-              Available to borrow: <GetUserDataCollat/>
+              <DialogTitle className="text-green-500 text-xl">
+                  <DepositProvider>
+                    Available to borrow: <GetUserDataCollat />
+                  </DepositProvider>
             </DialogTitle>
             {/* <DialogTitle className="text-green-500 text-xl">
               Amount to borrow

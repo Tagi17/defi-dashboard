@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { DepositProvider } from './depositContext';
 import DialogDepositPopup from "./dialogPopup";
 import DisplayBalance from "./displayBalance";
 import GetAaveWeth from "./getAaveWeth";
@@ -35,7 +36,9 @@ export default function WethArbDeposit() {
           <GetAaveWeth />
         </div>
         <div className="text-green-600 text-lg ">
-          <GetBorrow asset={wethAddress}/>
+          <DepositProvider>
+            <GetBorrow asset={wethAddress} />
+          </DepositProvider>
         </div>
         <div className="flex justify-end py-4 px-4">
           <DialogDepositPopup/>

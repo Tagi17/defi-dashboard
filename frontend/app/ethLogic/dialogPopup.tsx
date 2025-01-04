@@ -18,15 +18,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
+import { useDeposit } from "./depositContext";
 
 export default function DialogDepositPopup() {
   const [userInput, setUserInput] = useState("1");
   const [wethPrice, setWethPrice] = useState("");
   const [userInputinWei, setUserInputinWei] = useState(BigInt(10 ** 18));
   const { address: userAddress } = useAccount();
-
+  
   const { writeContractAsync } = useWriteContract();
   const wethGatewayAddress = wethArbGatewayAddress;
+  const { setDepositAmount } = useDeposit();
 
   useEffect(() => {
     const weiValue = BigInt(Math.floor(Number(userInput) * 10 ** 18));
@@ -47,6 +49,7 @@ export default function DialogDepositPopup() {
         args: [userAddress, userAddress, 0],
         value: userInputinWei,
       });
+      setDepositAmount(userInputinWei);
     } catch (error) {
       console.log(error);
     }
