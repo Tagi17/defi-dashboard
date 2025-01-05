@@ -23,7 +23,6 @@ interface DepositProviderProps{
 
 export const DepositProvider: React.FC<DepositProviderProps> = ({ children }) => {
     const [depositAmount, setDepositAmount] = useState(BigInt(0));
-
     return (
         <DepositContext.Provider value={{ depositAmount, setDepositAmount }}>
             {children}

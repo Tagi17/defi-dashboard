@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 import { DepositProvider } from './depositContext';
-import DialogDepositPopup from "./dialogPopup";
+import DialogDepositPopup from "./depositPopup";
 import DisplayBalance from "./displayBalance";
 import GetAaveWeth from "./getAaveWeth";
 import GetApyData from "./getApyData"
-import GetBorrow from "./borrow";
+import GetBorrow from "./borrowButton";
 import GetUserDataCollat from "./getUserDataCollat"
 import Image from "next/image";
 

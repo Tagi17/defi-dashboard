@@ -51,7 +51,6 @@ const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
         setUserInputWei(newValueWei);
     }
     
-
     const borrowParams: BorrowParameters = {
         asset: asset,
         // amount: amount,
@@ -61,7 +60,6 @@ const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
     }
 
     async function handleBorrow(){
-
     const result = await writeContractAsync({
         address: poolAddress as `0x${string}`,
         abi: poolAbi,
@@ -71,7 +69,8 @@ const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
 }
 
     return (
-        <div>
+      <div>
+        
             <Dialog>
                 <DialogTrigger asChild>
                     <Button className="bg-green-500 text-black font-bold px-6"
@@ -83,13 +82,10 @@ const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
                 <DialogContent className="sm:max-w-md bg-black">
           <DialogHeader>
               <DialogTitle className="text-green-500 text-xl">
-                  <DepositProvider>
-                    Available to borrow: <GetUserDataCollat />
-                  </DepositProvider>
+                  {/* <DepositProvider> */}
+                    <GetUserDataCollat />
+                  {/* </DepositProvider> */}
             </DialogTitle>
-            {/* <DialogTitle className="text-green-500 text-xl">
-              Amount to borrow
-            </DialogTitle> */}
             <DialogDescription className="text-green-600 text-lg">
               Borrow Balance:
             </DialogDescription>
@@ -117,9 +113,10 @@ const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
               </Button>
             </DialogClose>
           </DialogFooter>
-        </DialogContent>
-            </Dialog>
-        </div>
+          </DialogContent>
+          </Dialog>
+       
+      </div>
     )
 }
 export default GetBorrow;
