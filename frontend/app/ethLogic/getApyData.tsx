@@ -5,6 +5,7 @@ import { useAccount, useReadContract } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { formatUnits } from "viem/utils";
+import { wethAddress } from "./wethAddress"
 
 export default function GetApyData() {
 
@@ -23,7 +24,7 @@ export default function GetApyData() {
       address: poolAddress as `0x${string}`,
       abi: poolAbi,
       functionName: "getReserveData",
-      args: ['0x82aF49447D8a07e3bd95BD0d56f35241523fBab1'],
+      args: [wethAddress], 
     });
     
     useEffect(() => {

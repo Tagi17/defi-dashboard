@@ -2,6 +2,7 @@
 
 import { useAccount, useBalance } from 'wagmi';
 
+import GetEthAaveOraclePrice from "./getEthAaveOraclePrice";
 import Image from "next/image";
 
 export default function DisplayBalance() {
@@ -17,20 +18,17 @@ export default function DisplayBalance() {
         address: userAddress,
         chainId: 1,
     }) as { data?: BalanceData, isError: boolean, isLoading: boolean, error: any };
-    
 
     if (isLoading) {
         return <div>Loading...</div>;
     }
-    
     if (isError) {
         return <div>Error: {error.message}</div>; 
     }
-    
     if (data) {
         const formattedBalance = (Number(data.value) / 10 ** data.decimals).toFixed(2);
         return (
-            <div className="flex items-center space-x-2 text-sm">
+            <div className="flex items-center space-x-1 text-sm">
                  <span>Ether</span>
                 <Image
                     src="/circle.png"
@@ -39,7 +37,8 @@ export default function DisplayBalance() {
                     height={20}
                     unoptimized={true}  
                 />
-                <span>{formattedBalance} {data.symbol}</span>
+                <div><GetEthAaveOraclePrice/></div>
+                <span>{data.symbol}</span>
             </div>
         );
     }

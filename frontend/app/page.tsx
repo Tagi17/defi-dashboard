@@ -40,7 +40,7 @@ export default function Home() {
               <div className="mr-24">Current Deposit</div>
               <div className="mr-24">Current Collateral</div>
             </div>
-            <div className="w-full bg-black p-6 rounded-md border border-green-500 max-w-5xl mx-auto">
+            <div className="w-full bg-black p-6 rounded-md border border-green-500 max-w-10xl mx-auto">
             
                 <WethArbDeposit />
             

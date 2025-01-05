@@ -45,7 +45,9 @@ export default function DialogDepositPopup() {
         value: userInputinWei,
       });
       console.log("deposit successful", result);
+
       setDepositAmount(userInputinWei);
+      // console.log("After setting deposit amount", depositAmount.toString());
       console.log("Updated deposit amount to:", userInputinWei.toString());
     } catch (error) {
       console.log("error during deposit", error);

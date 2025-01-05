@@ -1,6 +1,7 @@
 import "./globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 
+import { DepositProvider, useDeposit } from "./ethLogic/depositContext"
 import { Geist, Geist_Mono, Newsreader, Vazirmatn } from "next/font/google";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
@@ -17,8 +18,6 @@ const newsreader = Newsreader({
   style: 'normal',
   subsets: ['latin'],
 })
-
-
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -37,6 +36,7 @@ export const metadata: Metadata = {
 const queryClient = new QueryClient()
 
 export default function RootLayout({
+  
   children,
 }: Readonly<{
   children: React.ReactNode;

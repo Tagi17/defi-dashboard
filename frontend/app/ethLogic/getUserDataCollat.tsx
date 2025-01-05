@@ -1,19 +1,27 @@
 "use client";
 
 import {DepositProvider, useDeposit} from "./depositContext"
+import { aaveOracleAbi, aaveOracleAddress } from "./aaveOracleContractAbi";
 import { poolAbi, poolAddress } from "../ethLogic/poolContractAbi";
 import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { formatUnits } from "viem/utils";
+import { wethAddress } from "./wethAddress"
 
 export default function GetUserDataCollat() {
 
   const { address: userAddress } = useAccount();
   const [userData, setUserData] = useState<UserAccountData | null>(null);
   const { depositAmount } = useDeposit();
+
+  const [ethPrice, setEthPrice] = useState<string | undefined>();
+  const [availableToBorrowETH, setAvailableToBorrowETH] = useState<string | undefined>();
+
+
   console.log("Current deposit amount in GetUserDataCollat:", depositAmount.toString());
   type UserAccountDataRaw = [bigint, bigint, bigint, bigint, bigint, bigint];
+ 
   interface UserAccountData {
     totalCollateralBase: bigint;
     totalDebtBase: bigint;
@@ -29,6 +37,13 @@ export default function GetUserDataCollat() {
     args: [userAddress],
   });
 
+  const { data: oracleData, isError: oracleIsError, isLoading: oracleIsLoading } = useReadContract({
+    address: aaveOracleAddress,
+    abi: aaveOracleAbi,
+    functionName: "getAssetPrice",
+    args: [wethAddress],
+    });
+
   useEffect(() => {
     
     console.log("Fetching user data:", data);
@@ -43,8 +58,13 @@ export default function GetUserDataCollat() {
         ltv: rawData[4],
         healthFactor: rawData[5],
       };
-      // setUserData(data as formattedData);
       setUserData(formattedData);
+
+      console.log("data recieved in wei", data.toString());
+      const priceFormattedEth = formatUnits(data as bigint, 8);
+      const roundedEth = parseFloat(priceFormattedEth).toFixed(2);
+      setEthPrice(`${roundedEth}`);
+      
     } else if (isError) {
       console.error("Error fetching user data from contract", isError);
     }
@@ -52,6 +72,15 @@ export default function GetUserDataCollat() {
       console.log("user not connected or no data to fetch");
     }
   }, [data, isError]);
+
+  useEffect(() => {
+    if (userData && ethPrice) {
+      const price = parseFloat(ethPrice);
+      const availableToBorrowEth = Number(userData.availableBorrowsBase) / (price);
+      setAvailableToBorrowETH(availableToBorrowEth.toFixed(2));
+      console.log(`Available to borrow in ETH: ${availableToBorrowEth}`);
+    }
+  }, [userData, ethPrice]);
   
   const availableBorrows = userData?.availableBorrowsBase !== undefined
   ? formatUnits(userData.availableBorrowsBase, 18)
@@ -59,21 +88,26 @@ export default function GetUserDataCollat() {
     console.log("Available borrows:", availableBorrows);
 
   const depositAmountDisplay = depositAmount ? depositAmount.toString() : '0';
+  console.log("Current deposit amount in GetUserDataCollat:", depositAmount.toString());
+
   console.log(userData?.availableBorrowsBase);
+  
+  // get the amount of eth that you can borrow
+  // getUserData.availableBorrowsBase / current price of eth
+  // const availableToBorrowUSD = userData?.availableBorrowsBase  || null;
+  // const availableToBorrowETH = availableToBorrowUSD / BigInt(ethPrice);
 
-
-  console.log("Current user data state in GetUserDataCollat:", userData);
+  
+  
+  // 800 / 1000
+  // 0.8 eth
 
   return (
     <div>
-     
-          {/* Available to Borrow: {availableBorrows} */}
             <br />
-          {/* Deposit Amount: {depositAmountDisplay} ETH */}
-          {/* <div>Available to Borrow: {userData ? formatUnits(userData.availableBorrowsBase, 18) : 'Loading...'}</div> */}
-          <div>Available to Borrow: {userData ? (userData.availableBorrowsBase / BigInt(10 ** 9)).toString() : 'Loading...'}</div>
-          <div>Deposit Amount: {depositAmount.toString()} ETH</div>
-          <div>Health Factor: {userData ? userData.healthFactor.toString() : 'N/A'}</div>
+          <div>Available to Borrow: {userData ? `${availableToBorrowETH} ETH`: 'Loading...'}</div>
+          {/* <div>Deposit Amount: {depositAmount.toString()} ETH</div> */}
+           {/* <div>Health Factor: {userData ? userData.healthFactor.toString() : 'N/A'}</div> */}
       </div>
   );
 }

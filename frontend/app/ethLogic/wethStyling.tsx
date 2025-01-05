@@ -1,20 +1,21 @@
 "use client";
 
+import { DepositProvider, useDeposit } from './depositContext';
 import { useEffect, useState } from "react";
 
-import { DepositProvider } from './depositContext';
 import DialogDepositPopup from "./depositPopup";
 import DisplayBalance from "./displayBalance";
 import GetAaveWeth from "./getAaveWeth";
 import GetApyData from "./getApyData"
 import GetBorrow from "./borrowButton";
-import GetUserDataCollat from "./getUserDataCollat"
+import  GetEthAaveOraclePrice from "./getEthAaveOraclePrice";
+import GetUserDataCollat from "./getUserDataCollat";
 import Image from "next/image";
 
 //works for any token except eth
 export default function WethArbDeposit() {
  const wethAddress = '0x82aF49447D8a07e3bd95BD0d56f35241523fBab1';
-
+ const { depositAmount } = useDeposit();
   // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   //   setUserInput(event.target.value);
   // }; if you wanted the input to automatically trigger metamask with every input
@@ -33,17 +34,19 @@ export default function WethArbDeposit() {
           <GetApyData/>
         </div>
         <div className="text-green-600 text-lg ">
-          <GetAaveWeth />
+          {/* <GetAaveWeth depositAmount={depositAmount} /> */}
+          <GetAaveWeth  />
         </div>
-        <div className="text-green-600 text-lg ">
+        <div className="text-green-600 text-lg ml-2">
           <DepositProvider>
             <GetBorrow asset={wethAddress} />
+            {/* <GetBorrow  /> */}
           </DepositProvider>
         </div>
         <div className="flex justify-end py-4 px-4">
           <DialogDepositPopup/>
         </div>
-        <div className="flex justify-end py-4 px-4">
+        <div className="flex justify-end py-4 px-4 mr-4">
           <GetUserDataCollat/>
         </div>
       </div>

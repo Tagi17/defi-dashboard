@@ -1,5 +1,6 @@
 "use client";
 
+import { DepositProvider, useDeposit } from './depositContext';
 import {
     Dialog,
     DialogClose,
@@ -15,8 +16,8 @@ import { useAccount, useReadContract, useWriteContract, } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { DepositProvider } from './depositContext';
 import DisplayBalance from "./displayBalance";
+import GetAaveWeth from "./getAaveWeth"
 import GetUserDataCollat from "./getUserDataCollat"
 import { Input } from "@/components/ui/input";
 import { fetchTokenPrice } from "../tokenPrice/tokenInfo";
@@ -82,12 +83,11 @@ const GetBorrow: React.FC<borrowProps> = ({asset}) =>{
                 <DialogContent className="sm:max-w-md bg-black">
           <DialogHeader>
               <DialogTitle className="text-green-500 text-xl">
-                  {/* <DepositProvider> */}
                     <GetUserDataCollat />
-                  {/* </DepositProvider> */}
+                    {/* <GetAaveWeth/> */}
             </DialogTitle>
             <DialogDescription className="text-green-600 text-lg">
-              Borrow Balance:
+              Currently Borrowed:
             </DialogDescription>
             <DialogDescription className="text-green-600 text-lg">
               APY:
