@@ -2,6 +2,7 @@
 
 import { useAccount, useBalance } from 'wagmi';
 
+import GetUSDCPrice from "./getUSDCAaveOraclePrice";
 import Image from "next/image";
 
 export default function DisplayBalanceUSDC() {
@@ -39,7 +40,8 @@ export default function DisplayBalanceUSDC() {
                     height={20}
                     unoptimized={true}  
                 />
-                <span>{formattedBalance} {data.symbol}</span>
+                <span><GetUSDCPrice/></span>
+                <span>{data.symbol}</span>
             </div>
         );
     }
