@@ -46,9 +46,9 @@ export default function WethArbDeposit() {
         <div className="flex justify-end py-4 px-4">
           <DialogDepositPopup/>
         </div>
-        <div className="flex justify-end py-4 px-4 mr-4">
+        {/* <div className="flex justify-end py-4 px-4 mr-4">
           <GetUserDataCollat/>
-        </div>
+        </div> */}
       </div>
     </div>
   );

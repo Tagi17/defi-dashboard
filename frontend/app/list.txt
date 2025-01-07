@@ -1,0 +1,31 @@
+# borrow screen
+1. Currently borrowed amount - variable debt token erc20 balance
+2. Available to borrow amount - getUserDataCollat.availableToBorrowBase
+    a. getUserData.availableToBorrowBase (the US dollar worth of your deposit). 
+        if you had 0.5 WETH deposited, and the price of 1 WETH is $4000,
+        availableToBorrowBase is 2000
+    b. then divide availableTokenBase / 10**27 = scaledNumber
+        availableTokenBase = 20000000000000000000
+        after dividing it should be like 2000
+    c. Then take the number after dividing and then divide it by the dollar worth
+    of 1 unit.
+        Soo if availableToBorrowBase is 2000, and ether is $4000
+    d. you are able to borrow 0.5 eth
+
+3. APR - you get it from reserveData and it be super high number you need to divide(format)
+
+
+# visual health meter 
+1. Based on health factor from getUserDataCollat
+ a. if its low then show red, if its high show green
+
+ #deposit screen
+ 1. check if the asset is selected/enabled to be collateral 
+ 2. if it is collateral, show toggle on, if not, show toggle off 
+ 
+
+
+Types of tokens in AAVE
+1. USDC
+    a. deposit token (represents the deposited amount) - aave arb USDC
+    b. variable debt token (represents the amount owed) - aave arb variable debt USDC

@@ -45,7 +45,7 @@ export default function RootLayout({
     <html lang="en" className={newsreader.className} >
       <body
       >
-            <Providers>
+            <Providers >
               {children}
             </Providers>
       </body>

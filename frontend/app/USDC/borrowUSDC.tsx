@@ -15,6 +15,7 @@ import { useAccount, useReadContract, useWriteContract, } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import GetDebtTokenUSDC from "./debtTokenUSDC"
 import { Input } from "@/components/ui/input"
 ;
 import { fetchTokenPrice } from "../tokenPrice/tokenInfo";
@@ -75,7 +76,7 @@ const GetBorrowUSDC: React.FC<borrowProps> = ({ asset, decimals}) =>{
               Amount to borrow
             </DialogTitle>
             <DialogDescription className="text-green-600 text-lg">
-              Borrow Balance:
+              <GetDebtTokenUSDC/>
             </DialogDescription>
             <DialogDescription className="text-green-600 text-lg">
               APY:
