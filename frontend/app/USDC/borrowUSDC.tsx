@@ -76,7 +76,7 @@ const GetBorrowUSDC: React.FC<borrowProps> = ({ asset, decimals}) =>{
               Amount to borrow
             </DialogTitle>
             <DialogDescription className="text-green-600 text-lg">
-              <GetDebtTokenUSDC/>
+                <GetDebtTokenUSDC assetAddress={asset} decimals={decimals}/>
             </DialogDescription>
             <DialogDescription className="text-green-600 text-lg">
               APY:

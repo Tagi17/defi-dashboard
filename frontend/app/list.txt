@@ -29,3 +29,5 @@ Types of tokens in AAVE
 1. USDC
     a. deposit token (represents the deposited amount) - aave arb USDC
     b. variable debt token (represents the amount owed) - aave arb variable debt USDC
+
+    //when do i use aarbusdc 

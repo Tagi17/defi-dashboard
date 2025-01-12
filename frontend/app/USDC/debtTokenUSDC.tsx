@@ -1,18 +1,26 @@
 "use client";
 
-import { debtUSDCAbi, debtUSDCAddress } from "./debtTokenUSDCContract";
+import { debtTokenAbi, debtTokenAddress } from "../debtTokenUSDCContract";
 import { useAccount, useReadContract } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { formatUnits } from "viem/utils";
 
-export default function GetDebtTokenUSDC() {
+interface DebtTokenProps {
+  assetAddress: string;
+  decimals: number;
+}
+
+const GetDebtTokenUSDC: React.FC<DebtTokenProps> = ({
+  assetAddress,
+  decimals,
+}) =>{
   const [borrowDebtAmt, setBorrowDebtAmt] = useState<string | null>(null);
   const { address: userAddress } = useAccount();
 
   const { data, isError } = useReadContract({
-    address: debtUSDCAddress,
-    abi: debtUSDCAbi,
+    address: assetAddress  as `0x${string}`,
+    abi: debtTokenAbi,
     functionName: "balanceOf",
     args: [userAddress],
   });
@@ -36,3 +44,4 @@ export default function GetDebtTokenUSDC() {
     <span>USDC Borrow Balance: {borrowDebtAmt?.toString() || "Loading..."}</span>
   );
 }
+export default GetDebtTokenUSDC;

@@ -3,18 +3,17 @@
 import { useAccount, useReadContract } from "wagmi";
 import { useEffect, useState } from "react";
 
-import GetEthAaveOraclePrice from "./getEthAaveOraclePrice"
+import GetEthAaveOraclePrice from "../useAaveOraclePrice";
 import { erc20Abi } from "viem";
 import { fetchTokenPrice } from "../tokenPrice/tokenInfo";
 import { formatUnits } from "viem/utils";
 
 interface GetAaveWethProps {
-    depositAmount: bigint;  
+  depositAmount: bigint;
 }
 
 // export default function GetAaveWeth({depositAmount}: GetAaveWethProps) {
 export default function GetAaveWeth() {
-  
   const address = "0xe50fa9b3c56ffb159cb0fca61f5c9d750e8128c8"; //aavearbweth that is deposited, shows interest
   const [wethPrice, setWETHPrice] = useState("");
   const [wethValueinUSD, setWethValueinUSD] = useState("");
@@ -27,15 +26,17 @@ export default function GetAaveWeth() {
       functionName: "balanceOf",
       args: [userAddress as `0x${string}`],
     });
-  
+
   useEffect(() => {
-    fetchTokenPrice().then(price => {
-      setWETHPrice(price);
-    }).catch(error => {
-      console.error('Failed to fetch WETH price:', error);
-    });
+    fetchTokenPrice()
+      .then((price) => {
+        setWETHPrice(price);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch WETH price:", error);
+      });
   }, []);
-  
+
   useEffect(() => {
     if (!wethPrice || !userBalance) return;
 
@@ -43,7 +44,6 @@ export default function GetAaveWeth() {
     const valueInUSD = balanceInEth * Number(wethPrice);
     setWethValueinUSD(valueInUSD.toFixed(2));
   }, [userBalance, wethPrice]);
-
 
   if (!userAddress) return <div>User Address not found</div>;
   if (isLoadingUserBalance) return <div>Loading...</div>;
