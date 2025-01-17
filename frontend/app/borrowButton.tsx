@@ -16,7 +16,7 @@ import { useAccount, useReadContract, useWriteContract } from "wagmi";
 import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import DisplayBalance from "./displayBalance";
+import DisplayBalance from "./displayPrice";
 import GetAaveWeth from "./ethLogic/getAaveWeth";
 import GetUserDataCollat from "./getUserDataCollat";
 import { Input } from "@/components/ui/input";
@@ -109,7 +109,12 @@ const GetBorrow: React.FC<GetBorrowProps> = ({
         <DialogContent className="sm:max-w-md bg-black">
           <DialogHeader>
             <DialogTitle className="text-green-500 text-xl">
-              <GetUserDataCollat assetAddress={assetAddress} poolAddress={poolAddress} poolAbi={poolAbi} />
+              <GetUserDataCollat
+                assetAddress={assetAddress}
+                poolAddress={poolAddress}
+                poolAbi={poolAbi}
+                decimals={decimals}
+              />
               Borrow {assetName}
               {/* <GetAaveWeth/> */}
             </DialogTitle>

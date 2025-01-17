@@ -5,7 +5,7 @@ import { useAccount, useBalance } from "wagmi";
 import Image from "next/image";
 import UseAaveOraclePrice from "./useAaveOraclePrice";
 
-interface DisplayBalanceProps {
+interface DisplayPriceProps {
   assetName: string;
   assetAddress: string;
   decimals: number;
@@ -13,7 +13,7 @@ interface DisplayBalanceProps {
   chainId: number;
 }
 
-const DisplayBalance: React.FC<DisplayBalanceProps> = ({
+const DisplayBalance: React.FC<DisplayPriceProps> = ({
   assetName,
   assetAddress,
   decimals,
@@ -61,6 +61,4 @@ const DisplayBalance: React.FC<DisplayBalanceProps> = ({
       </div>
     );
   }
-  // return <div className="text-xl">No balance data available</div>;
-// };
 export default DisplayBalance;

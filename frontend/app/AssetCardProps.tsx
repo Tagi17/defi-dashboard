@@ -5,7 +5,7 @@ import { poolAbi, poolAddress } from "./ethLogic/poolContractAbi";
 import AssetDeposit from "./assetDeposit";
 import { DepositProvider } from "./depositContext";
 import DialogDepositPopup from "./depositPopup";
-import DisplayBalance from "./displayBalance";
+import DisplayBalance from "./displayPrice";
 import GetApyData from "./getApyData";
 import GetBorrow from "./borrowButton";
 import Image from "next/image";
@@ -36,19 +36,18 @@ const AssetCard: React.FC<AssetCardProps> = ({
       <div className="flex">
         <Image src={logoSrc} width={90} height={80} alt={`${name} Logo`} />
       </div>
-      <div className="text-lg">
-      </div>
+      <div className="text-lg"></div>
       <div className="text-green-600 text-lg ml-2">
-          <AssetDeposit
-        name={name}
-        address={address}
-        poolAddress={poolAddress}
-        poolAbi={poolAbi}
-        abi={abi}
-        decimals={decimals}
-        depositFunctionName={depositFunctionName}
-        borrowFunctionName={borrowFunctionName}
-      />
+        <AssetDeposit
+          name={name}
+          address={address}
+          poolAddress={poolAddress}
+          poolAbi={poolAbi}
+          abi={abi}
+          decimals={decimals}
+          depositFunctionName={depositFunctionName}
+          borrowFunctionName={borrowFunctionName}
+        />
       </div>
     </div>
   );

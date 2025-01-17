@@ -5,7 +5,8 @@ import { poolAbi, poolAddress } from "./ethLogic/poolContractAbi";
 import { useEffect, useState } from "react";
 
 import DialogDepositPopup from "./depositPopup";
-import DisplayBalance from "./displayBalance";
+import DisplayBalance from "./displayPrice";
+import DisplayDepositedBalance from "./displayDepositedBalance";
 import GetAaveWeth from "./ethLogic/getAaveWeth";
 import GetApyData from "./getApyData";
 import GetBorrow from "./borrowButton";
@@ -52,7 +53,7 @@ const AssetDeposit: React.FC<AssetDepositProps> = ({
           <GetApyData assetAddress={address} decimals={decimals} />
         </div>
         <div className="text-green-600 text-lg ">
-          <GetAaveWeth />
+          <DisplayDepositedBalance assetName={name} assetAddress={address} decimals={decimals} />
         </div>
         <div className="text-green-600 text-lg ml-2">
           <DepositProvider>
